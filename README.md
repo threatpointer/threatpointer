@@ -139,25 +139,10 @@ Online, you might know me as threatpointer.
   <a href="https://github.com/threatpointer/v8-optimized-fuzzer">
     <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/pin/?username=threatpointer&repo=v8-optimized-fuzzer&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=0891b2&icon_color=0891b2&text_color=ffffff" />
   </a>
-  <a href="https://github.com/threatpointer/Tcpdump-Crashes">
-    <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/pin/?username=threatpointer&repo=Tcpdump-Crashes&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=0891b2&icon_color=0891b2&text_color=ffffff" />
-  </a>
   <a href="https://github.com/threatpointer/Http3App">
     <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/pin/?username=threatpointer&repo=Http3App&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=0891b2&icon_color=0891b2&text_color=ffffff" />
   </a>
 </div>
-
-### 🔐 v8-optimized-fuzzer
-
-A specialized fuzzing framework for identifying vulnerabilities in the V8 JavaScript engine. It generates high-value test cases targeting specific vulnerability patterns like JIT type confusion and array bounds issues.
-
-### 🔐 Tcpdump-Crashes
-
-A collection of crashes discovered while fuzzing tcpdump version 4.6.2. This project aims to improve the robustness of network packet analysis by identifying potential vulnerabilities.
-
-### 🔐 Http3App
-
-A simple application built to fuzz the QUIC protocol, aiming to discover vulnerabilities in HTTP/3 implementations.
 
 ## 📊 GitHub Stats
 
