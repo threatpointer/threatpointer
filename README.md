@@ -1,6 +1,6 @@
 <div align="center">
-  <h1 style="color: #0891b2; margin-bottom: 0; font-size: 42px;">Mohammed Tanveer</h1>
-  <h3 style="color: #0891b2; margin-top: 0; font-size: 24px;">Security Researcher & Architect</h3>
+  <h1 style="color: #0891b2; margin-bottom: 0; font-size: 54px;">Mohammed Tanveer</h1>
+  <h3 style="color: #0891b2; margin-top: 0; font-size: 28px;">Security Researcher & Architect</h3>
   
   <div>
     <a href="https://github.com/threatpointer"><img src="https://img.shields.io/github/followers/threatpointer?label=Followers&style=social" alt="GitHub Followers" /></a>
