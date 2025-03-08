@@ -1,20 +1,26 @@
-   name: Latest Blog Posts
-   on:
-     schedule:
-       # Runs every day at 8:00 AM
-       - cron: '0 8 * * *'
-     workflow_dispatch:
-   
-   jobs:
-     update-readme-with-blog:
-       name: Update README with latest blog posts
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v2
-         - uses: gautamkrishnar/blog-post-workflow@master
-           with:
-             feed_list: "https://mdtanveer.com/rss.xml"
-             max_post_count: 5
-             readme_path: "./v8-basic-fuzzer/README.md"
-             template: "[$title]($url)"
-             date_format: "yyyy-mm-dd"
+name: Latest Blog Posts
+on:
+  schedule:
+    # Runs every day at 8:00 AM
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-readme-with-blog:
+    name: Update README with latest blog posts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetch RSS feed with retries
+        id: fetch-rss
+        run: |
+          for i in {1..5}; do
+            curl --fail -o rss.xml https://mdtanveer.com/rss.xml && break || sleep 30
+          done
+      - uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          feed_list: "rss.xml"
+          max_post_count: 5
+          readme_path: "./v8-basic-fuzzer/README.md"
+          template: "[$title]($url)"
+          date_format: "yyyy-mm-dd"
