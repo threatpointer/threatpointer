@@ -1,26 +1,38 @@
 name: Latest Blog Posts
+
 on:
   schedule:
-    # Runs every day at 8:00 AM
-    - cron: '0 8 * * *'
-  workflow_dispatch:
+    - cron: '0 * * * *'  # Runs every hour
+  workflow_dispatch:     # Allows manual triggering
 
 jobs:
-  update-readme-with-blog:
-    name: Update README with latest blog posts
+  fetch-posts:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Fetch RSS feed with retries
-        id: fetch-rss
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Fetch latest blog posts
         run: |
-          for i in {1..5}; do
-            curl --fail -o rss.xml https://mdtanveer.com/rss.xml && break || sleep 30
+          retries=5
+          delay=5
+          for i in $(seq 1 $retries); do
+            response=$(curl -s -o /dev/null -w "%{http_code}" https://mdtanveer.com/rss.xml)
+            if [ $response -eq 200 ]; then
+              echo "Request succeeded"
+              # Add your code to handle the RSS feed here
+              break
+            elif [ $response -eq 429 ]; then
+              echo "Rate limited. Retrying in $delay seconds..."
+              sleep $delay
+              delay=$((delay * 2))
+            else
+              echo "Request failed with status $response"
+              exit 1
+            fi
           done
-      - uses: gautamkrishnar/blog-post-workflow@master
-        with:
-          feed_list: "rss.xml"
-          max_post_count: 5
-          readme_path: "./v8-basic-fuzzer/README.md"
-          template: "[$title]($url)"
-          date_format: "yyyy-mm-dd"
+          if [ $retries -eq 5 ]; then
+            echo "Failed to fetch the RSS feed after $retries attempts."
+            exit 1
+          fi
