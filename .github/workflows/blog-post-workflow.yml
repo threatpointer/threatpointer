@@ -1,19 +1,27 @@
-name: Latest blog post workflow
+name: Latest Blog Posts
+
 on:
-  schedule: # Run workflow automatically
-    - cron: '0 * * * *' # Runs every hour, on the hour
-  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
-permissions:
-  contents: write # To write the generated contents to the readme
+  schedule:
+    - cron: '0 0 * * *'  # Runs once per day at midnight instead of every hour
+  workflow_dispatch:     # Allows manual triggering
 
 jobs:
   update-readme-with-blog:
-    name: Update this repo's README with latest blog posts
+    name: Update README with latest blog posts
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Pull in dev.to posts
+        uses: actions/checkout@v3
+      
+      - name: Pull in blog posts
         uses: gautamkrishnar/blog-post-workflow@v1
         with:
-          feed_list: "https://mdtanveer.com/rss.xml?x-host=mdtanveer.com"
+          feed_list: "https://mdtanveer.com/rss.xml"
+          max_post_count: 5
+          readme_path: "./README.md"
+          template: "* [[$title]($url)] - $date"
+          committer_username: "blog-post-bot"
+          committer_email: "blog-post-bot@example.com"
+          user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+          retry_count: 3
+          disable_sort: true 
