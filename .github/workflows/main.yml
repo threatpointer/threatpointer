@@ -6,33 +6,19 @@ on:
   workflow_dispatch:     # Allows manual triggering
 
 jobs:
-  fetch-posts:
+  update-readme-with-blog:
+    name: Update README with latest blog posts
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Fetch latest blog posts
-        run: |
-          retries=5
-          delay=5
-          for i in $(seq 1 $retries); do
-            response=$(curl -s -o /dev/null -w "%{http_code}" https://mdtanveer.com/rss.xml)
-            if [ $response -eq 200 ]; then
-              echo "Request succeeded"
-              # Add your code to handle the RSS feed here
-              break
-            elif [ $response -eq 429 ]; then
-              echo "Rate limited. Retrying in $delay seconds..."
-              sleep $delay
-              delay=$((delay * 2))
-            else
-              echo "Request failed with status $response"
-              exit 1
-            fi
-          done
-          if [ $retries -eq 5 ]; then
-            echo "Failed to fetch the RSS feed after $retries attempts."
-            exit 1
-          fi
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Pull in blog posts
+        uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          feed_list: "https://mdtanveer.com/rss.xml"
+          max_post_count: 5
+          readme_path: "./README.md"
+          template: "* [$title]($url) - $date"
+          committer_username: "github-actions[bot]"
+          committer_email: "41898282+github-actions[bot]@users.noreply.github.com"
