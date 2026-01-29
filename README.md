@@ -23,7 +23,7 @@
 
 ## <img src="https://i.imgur.com/Ua7udoS.png" alt="Security" width="28px"/> About Me
 
-I'm a seasoned security professional with over 15 years of experience in security engineering, product security, and cloud security. Currently, I lead security architecture and product security initiatives at Microsoft, driving secure development across Azure Edge & Platform, Windows & Devices, and Gaming.
+I'm a seasoned security professional with over 15+ years of experience in security engineering, product security, and cloud security. Currently, I lead security architecture and product security initiatives at Microsoft, driving secure development across Azure Edge & Platform, Windows & Devices, and Gaming.
 
 Throughout my career at Microsoft, SAP Ariba, and Citrix, I've played a key role in strengthening security postures, establishing cross-functional security teams, and securing Microsoft acquisitions. My expertise spans threat modeling, vulnerability research, exploit development, penetration testing, and Red Teaming.
 
